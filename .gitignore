@@ -1,0 +1,5 @@
+#igonore all file in __pychace__
+__pycache__/
+
+#igonore all file in venv
+venv/

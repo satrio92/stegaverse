@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+		rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						poppins: ['Poppins'],
+						varien: ['Varien']
+					},
+					colors: {
+						main: "#050915",
+						clifford: "#da373d",
+						bluefish: "#5CE1E6",
+					},
+				},
+			},
+		};
+	</script>
+	<title>Simple Secure Stego</title>
+</head>
+
+<body>
+	<div id="app" class="w-full flex flex-col items-center py-[48px] gap-[32px] bg-main font-poppins text-white">
+		<div class="flex flex-col gap-[14px]">
+			<h1 class="title text-gradient text-5xl lg:text-6xl font-bold font-varien">STEGAVERSE</h1>
+			<p class="text-center">Tools for steganography and cryptography</p>
+		</div>
+		<div class="flex">
+			<a href="/"
+				class="border border-white py-[16px] px-[24px] rounded-l-[6px] font-medium text-[18px]">Encryption</a>
+			<a href="#"
+				class="py-[16px] px-[24px] rounded-r-[6px] bg-blue-gradient text-black font-medium text-[18px]">Decryption</a>
+		</div>
+		<form action="" method="post" enctype="multipart/form-data" class="flex flex-col items-center gap-[32px]">
+			<div>
+				<label for="image">
+                    {% if not image_path %}
+                        <div id="imagelabel"
+                            class="w-[580px] h-[260px] border border-white rounded-[14px] cursor-pointer flex flex-col items-center justify-center gap-[18px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="44" viewBox="0 0 20 22" fill="none">
+                                <path d="M10.7935 9.09823C10.7787 9.08635 10.7642 9.07487 10.75 9.06379V16C10.75 16.4142 10.4142 16.75 10 16.75C9.58579 16.75 9.25 16.4142 9.25 16V9.06379C9.23578 9.07487 9.22128 9.08635 9.20649 9.09823C8.88386 9.35733 8.50033 9.74268 7.93054 10.3176L6.53269 11.728C6.24111 12.0222 5.76624 12.0243 5.47204 11.7327C5.17784 11.4411 5.17573 10.9662 5.46731 10.672L6.89565 9.2309C7.42703 8.69473 7.87023 8.24753 8.26724 7.92869C8.68367 7.59426 9.12131 7.33989 9.65451 7.27193C9.88392 7.24269 10.1161 7.24269 10.3455 7.27193C10.8787 7.33989 11.3163 7.59427 11.7328 7.92869C12.1298 8.24753 12.573 8.69471 13.1043 9.23087L14.5327 10.672C14.8243 10.9662 14.8222 11.4411 14.528 11.7327C14.2338 12.0243 13.7589 12.0222 13.4673 11.728L12.0695 10.3176C11.4997 9.74268 11.1161 9.35733 10.7935 9.09823Z" fill="#FAFAFA"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0257 0.279369C12.1685 0.25 11.1711 0.25 10.0111 0.25H9.95475C8.11821 0.249992 6.67861 0.249985 5.53648 0.373728C4.37094 0.500006 3.42656 0.762324 2.62024 1.34815C2.13209 1.70281 1.70281 2.13209 1.34815 2.62024C0.762324 3.42656 0.500006 4.37094 0.373728 5.53648C0.249985 6.67861 0.249992 8.11821 0.25 9.95475V12.0452C0.249992 13.8818 0.249985 15.3214 0.373728 16.4635C0.500006 17.6291 0.762324 18.5734 1.34815 19.3798C1.70281 19.8679 2.13209 20.2972 2.62024 20.6518C3.42656 21.2377 4.37094 21.5 5.53648 21.6263C6.67859 21.75 8.11817 21.75 9.95465 21.75H10.0453C11.8818 21.75 13.3214 21.75 14.4635 21.6263C15.6291 21.5 16.5734 21.2377 17.3798 20.6518C17.8679 20.2972 18.2972 19.8679 18.6518 19.3798C19.2377 18.5734 19.5 17.6291 19.6263 16.4635C19.75 15.3214 19.75 13.8818 19.75 12.0453V9.98899C19.75 8.82891 19.75 7.83153 19.7206 6.97432C19.6564 5.10087 19.4537 3.7239 18.6518 2.62024C18.2972 2.13209 17.8679 1.70281 17.3798 1.34815C16.2761 0.546296 14.8991 0.343555 13.0257 0.279369ZM3.50191 2.56168C4.00992 2.19259 4.66013 1.97745 5.69804 1.865C6.74999 1.75103 8.10843 1.75 10 1.75C10.8483 1.75 11.5918 1.75005 12.2518 1.76082C12.2562 2.23547 12.271 2.58489 12.3208 2.8995C12.7105 5.35988 14.6401 7.28952 17.1005 7.67921C17.4151 7.72904 17.7645 7.74381 18.2392 7.74818C18.25 8.40822 18.25 9.15165 18.25 10V12C18.25 13.8916 18.249 15.25 18.135 16.302C18.0225 17.3399 17.8074 17.9901 17.4383 18.4981C17.1762 18.8589 16.8589 19.1762 16.4981 19.4383C15.9901 19.8074 15.3399 20.0225 14.302 20.135C13.25 20.249 11.8916 20.25 10 20.25C8.10843 20.25 6.74999 20.249 5.69804 20.135C4.66013 20.0225 4.00992 19.8074 3.50191 19.4383C3.14111 19.1762 2.82382 18.8589 2.56168 18.4981C2.19259 17.9901 1.97745 17.3399 1.865 16.302C1.75103 15.25 1.75 13.8916 1.75 12V10C1.75 8.10843 1.75103 6.74999 1.865 5.69804C1.97745 4.66013 2.19259 4.00992 2.56168 3.50191C2.82382 3.14111 3.14111 2.82382 3.50191 2.56168ZM13.8023 2.66485C13.7699 2.45981 13.7575 2.22238 13.7528 1.81744C15.1131 1.91121 15.8986 2.12615 16.4981 2.56168C16.8589 2.82382 17.1762 3.14111 17.4383 3.50191C17.8738 4.10137 18.0888 4.88688 18.1826 6.24722C17.7776 6.24254 17.5402 6.23015 17.3352 6.19768C15.5166 5.90965 14.0904 4.48339 13.8023 2.66485Z" fill="#FAFAFA"/>
+                            </svg>
+                            <span class="text-[18px] font-medium">Upload image</span>
+                        </div>
+                    {% endif %}
+					<div id="preview" class="w-full h-full hidden justify-center items-center">
+						<img src="" alt="" id="imagepreview" class="max-h-[500px]">
+					</div>
+                    {% if image_path %}
+                        <img src="{{image_path}}"" alt="" id="imagepreview" class="max-h-[500px]">
+                    {% endif %}
+				</label>
+				<input type="file" id="image" name="image" hidden>
+			</div>
+            {% if decrypted_message %}
+			    <div id="decrypted" class="flex w-[580px] flex-col gap-[10px] items-center text-[18px] font-medium">
+                    <span>Pesan hasil dekripsi adalah:</h2>
+                    <span>{{ decrypted_message }}</p>
+			    </div>
+            {% endif %}
+			<div class="flex">
+				<label for="shift"
+					class="py-[10px] px-[16px] border border-white rounded-l-[6px] bg-blue-gradient text-black font-medium text-[18px]">Shift</label>
+				<input type="number" id="shift" name="shift" value="1" required
+					class="py-[10px] px-[16px] border border-white rounded-r-[6px] w-[80px]">
+			</div>
+			<button id="submit" type="submit">
+				<div
+					class="py-[12px] px-[22px] rounded-[6px] border border-white button hover:text-black hover:-translate-y-[6px] transition-all duration-150 font-medium text-[18px] mt-[6px]">
+					Decrypt Now
+				</div>
+			</button>
+		</form>
+	</div>
+    <div id="box" class="fixed w-full h-screen z-30 top-0 left-0" style="display: none">
+        <div id="notification" class="absolute top-6 right-10 py-[12px] px-[26px] border border-blue-gradient rounded-[6px] text-[18px] font-medium"></div>
+    </div>
+    <div id="loading" class="fixed top-0 left-0 w-full h-screen z-30 hidden justify-center items-center bg-white/15">
+        <p class="text-[22px] font-semibold py-[12px] px-[32px] bg-white rounded-[6px]">sabar boss, masih proses..</p>
+    </div>
+</body>
+
+<script>
+	const submit = document.querySelector("#submit");
+	const imagePreview = document.querySelector("#imagepreview")
+	const preview = document.querySelector("#preview")
+	const imageLabel = document.querySelector("#imagelabel")
+	const imageInput = document.querySelector("#image");
+	const shiftInput = document.querySelector("#shift");
+	const loading = document.querySelector("#loading");
+	const app = document.querySelector("#app");
+
+	imageInput.addEventListener('change', (e) => {
+		console.log(e)
+		imageLabel.classList.remove('flex');
+		preview.classList.remove('hidden');
+		preview.classList.add('flex');
+		imageLabel.classList.add('hidden');
+		imagePreview.src = URL.createObjectURL(e.target.files[0]);
+	})
+
+	function showNotification(message, color, duration) {
+			const box = document.getElementById('box');
+			const notification = document.getElementById('notification');
+			notification.textContent = message;
+            notification.classList.add('bg-'+color+'-400/20')
+			notification.style.border = '1px solid ' + color;
+			notification.style.color = 'white';
+			box.style.display = 'block';
+			
+			setTimeout(() => {
+					box.style.display = 'none';
+			}, duration);
+    }
+
+	submit.addEventListener('click', (e) => {
+		if (shiftInput.vlaue == "" || shiftInput.value == null) {
+			e.preventDefault();
+			showNotification('gambar atau shift tidak boleh kosong!', 'yellow', 3000);
+		} else {
+            loading.classList.remove('hidden');
+            loading.classList.add('flex');
+            app.classList.add('blur-sm')
+			showNotification('pesan berhasil dekripsi', 'green', 3000);
+		}
+	})
+</script>
+
+</html>
